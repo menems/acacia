@@ -1,6 +1,6 @@
 {
   "name": "koa-api-base",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "koa api base module",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
     "koa-morgan": "^0.4.0",
     "models-stack": "^1.0.0"
   },
-   "engines": {
+  "engines": {
     "node": ">= 4"
   }
 }
