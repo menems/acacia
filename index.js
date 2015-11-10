@@ -10,7 +10,7 @@ const resources = require('koa-66-aggregate');
 const servicesStack = require('services-stack');
 const extend = require('extend');
 
-class KoaApiBase extends Koa {
+class Acacia extends Koa {
 
     constructor(config) {
         super();
@@ -61,4 +61,4 @@ class KoaApiBase extends Koa {
     }
 
 }
-module.exports = KoaApiBase;
+module.exports = Acacia;
