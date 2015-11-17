@@ -47,8 +47,8 @@ class Acacia extends Koa {
         return this;
     }
 
-    initResources () {
-        this.use(resources(this.context.config.path.resources).routes());
+    initResources (context) {
+        this.use(resources(this.context.config.path.resources, context).routes());
         return this;
     }
 
