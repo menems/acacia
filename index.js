@@ -1,6 +1,6 @@
 "use strict";
 
-const debug  = require('debug')('koa-api-base');
+const debug  = require('debug')('acacia');
 const Koa = require('koa');
 const morgan = require('koa-morgan');
 const convert = require('koa-convert');
@@ -9,6 +9,7 @@ const bodyParser = require('koa-bodyparser');
 const resources = require('koa-66-aggregate');
 const servicesStack = require('services-stack');
 const extend = require('extend');
+const Validation = require('chain-validator');
 
 class Acacia extends Koa {
 
@@ -28,6 +29,9 @@ class Acacia extends Koa {
 
         // body parser
         this.use(convert(bodyParser()));
+
+        // validation helper
+        this.use(Validation.koaMiddleware);
     }
 
     initCors (config) {
@@ -41,22 +45,46 @@ class Acacia extends Koa {
         })));
     }
 
+    /**
+     * Initialise services throw directories using
+     * services-stack package.
+     *
+     * Inject `context` object in services of type functions
+     * Base context has already default properties:
+     * - config: config object (constructor param)
+     * - Validation: chain-validator objet(validation-helper)
+     *
+     * @param  {object} context
+     * @return {object} Acacia instance
+     */
     initServices (context) {
-        context = extend({config: this.context.config}, context);
+        const base = {
+            config: this.context.config,
+            Validation : Validation
+        };
+        context = extend(base, context);
         this.context.services = servicesStack(this.context.config.path.services, context);
         return this;
     }
 
-    initResources (context) {
-        this.use(resources(this.context.config.path.resources, context).routes());
+    /**
+     * Initialise routers throw directories
+     *
+     * Inject `plugins` object on each Router object
+     *
+     * @param  {object} context
+     * @return {object} Acacia instance
+     */
+    initResources (plugins) {
+        this.use(resources(this.context.config.path.resources, plugins).routes());
         return this;
     }
 
     listen(fn) {
         return super.listen(this.context.config.port, () => {
             if ( this.env === 'development')
-                console.log('listening' ,this.context.config.port);
-            if (fn && typeof fn == 'function') fn.call();
+                console.log('listening on ' + this.context.config.port);
+            if (fn && typeof fn == 'function') fn.call(this);
         });
     }
 

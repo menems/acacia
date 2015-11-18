@@ -18,6 +18,7 @@
     "url": "https://github.com/menems/acacia.git"
   },
   "dependencies": {
+    "chain-validator": "menems/chain-validator",
     "debug": "^2.2.0",
     "extend": "^3.0.0",
     "koa": "2.0.0-alpha.3",
