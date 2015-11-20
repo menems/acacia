@@ -1,5 +1,6 @@
 "use strict";
 
+const path =  require('path');
 const debug  = require('debug')('acacia');
 const Koa = require('koa');
 const morgan = require('koa-morgan');
@@ -54,16 +55,20 @@ class Acacia extends Koa {
      * - config: config object (constructor param)
      * - Validation: chain-validator objet(validation-helper)
      *
-     * @param  {object} context
+     * @param  {object} options
      * @return {object} Acacia instance
      */
-    initServices (context) {
+    services (options) {
+
+        options = options || {};
+
         const base = {
             config: this.context.config,
             Validation : Validation
         };
-        context = extend(base, context);
-        this.context.services = servicesStack(this.context.config.path.services, context);
+
+        options.context = extend(base, options.context);
+        this.context.services = servicesStack(options);
         return this;
     }
 
@@ -72,11 +77,11 @@ class Acacia extends Koa {
      *
      * Inject `plugins` object on each Router object
      *
-     * @param  {object} context
+     * @param  {object} options
      * @return {object} Acacia instance
      */
-    initResources (plugins) {
-        this.use(resources(this.context.config.path.resources, plugins).routes());
+    resources (options) {
+        this.use(resources(options).routes());
         return this;
     }
 
