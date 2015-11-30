@@ -22,14 +22,14 @@ class Acacia extends Koa {
 
         // logger
         if ( this.env !== 'test')
-            this.use(convert(morgan.middleware(this.context.config.log || 'dev')));
+            this.use(morgan(this.context.config.log || 'dev'));
 
         // cors
         if (this.context.config.security && this.context.config.security.cors)
             this.initCors(this.context.config.security.cors);
 
         // body parser
-        this.use(convert(bodyParser()));
+        this.use(bodyParser());
 
         // validation helper
         this.use(Validation.koaMiddleware);
@@ -38,6 +38,12 @@ class Acacia extends Koa {
     initCors (config) {
         this.use(convert(cors({
             origin: req => {
+                if (!req.header.origin ||
+                    !config.domains ||
+                    !config.domains.length ||
+                    config.domains[0].origin === '*')
+                    return '*';
+
                 const has = config.domains.filter( domain =>
                     req.header.origin === domain.origin
                 );

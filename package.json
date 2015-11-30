@@ -4,7 +4,9 @@
   "description": "Minimalist framework for api based on koa v2",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require should",
+    "test-cov": "istanbul cover _mocha -- --require should --bail",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- --require should --bail"
   },
   "keywords": [
     "koa",
@@ -23,13 +25,20 @@
     "extend": "^3.0.0",
     "koa": "2.0.0-alpha.3",
     "koa-66-aggregate": "^0.1.0",
-    "koa-bodyparser": "^2.0.1",
+    "koa-bodyparser": "^3.0.0",
     "koa-convert": "^1.0.0",
     "koa-cors": "0.0.16",
-    "koa-morgan": "^0.4.0",
+    "koa-morgan": "^1.0.0-alpha.1",
     "services-stack": "^1.0.3"
   },
   "engines": {
     "node": ">= 4"
+  },
+  "devDependencies": {
+    "istanbul": "^0.4.1",
+    "koa-66": "^0.7.3",
+    "mocha": "^2.3.4",
+    "should": "^7.1.1",
+    "supertest": "^1.1.0"
   }
 }
