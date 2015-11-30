@@ -1,4 +1,10 @@
 
+v0.2.0 / 2015-12-01
+===================
+
+  * fix: new ServicesStack
+  * fix: cors wihtout origin should work
+
 v0.1.0 / 2015-11-20
 ===================
 
