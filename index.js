@@ -74,7 +74,7 @@ class Acacia extends Koa {
         };
 
         options.context = extend(base, options.context);
-        this.context.services = servicesStack(options);
+        this.context.service = servicesStack(options);
         return this;
     }
 
@@ -100,4 +100,5 @@ class Acacia extends Koa {
     }
 
 }
+
 module.exports = Acacia;
