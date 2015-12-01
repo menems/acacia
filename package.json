@@ -1,6 +1,6 @@
 {
   "name": "acacia",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Minimalist framework for api based on koa v2",
   "main": "index.js",
   "scripts": {
