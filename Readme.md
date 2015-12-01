@@ -19,6 +19,12 @@ The goal is to have an api starter kit
 - services helper via [services-stack](https://github.com/menems/services-stack)
 - validation via [chain-validation](https://github.com/menems/chain-validator) WIP
 
+## Installation
+
+```bash
+$ npm install acacia
+```
+
 ## Example
 
 take a look at [acacia-example](https://github.com/menems/acacia-example)
