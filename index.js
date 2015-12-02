@@ -36,7 +36,8 @@ class Acacia extends Koa {
     }
 
     initCors (config) {
-        this.use(convert(cors({
+
+        let options = {
             origin: req => {
                 if (!req.header.origin ||
                     !config.domains ||
@@ -49,7 +50,15 @@ class Acacia extends Koa {
                 );
                 return (has.length)? has[0].origin : false;
             }
-        })));
+        }
+
+        if (config.headers) options.headers = config.headers;
+
+        if (config.credentials) options.credentials = config.credentials;
+
+        if (config.maxAge) options.maxAge = config.maxAge;
+
+        this.use(convert(cors(options)));
     }
 
     /**
