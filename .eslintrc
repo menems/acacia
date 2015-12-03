@@ -3,6 +3,12 @@
     'node': true,
     'es6': false
   },
+  globals: {
+    'describe': true,
+    'it': true,
+    'before': true,
+    'after': true
+  },
   ecmaFeatures: {
     'arrowFunctions': true,
     'blockBindings': true,
