@@ -35,17 +35,32 @@ const config2 = {
     }
 };
 
-function createApp(config) {
+function createApp(config, services) {
     const app = new Acacia(config);
-    app.resources({
-        path: __dirname + '/routes'
-    });
+    app.resources({path: __dirname + '/routes'});
+
+    if (!services) app.services({path: __dirname + '/services'});
+    else app.services();
+
     return app.listen();
 }
+
 describe('acacia main', () => {
     it('should has default port without config', done => {
         const app = new Acacia();
         app.context.config.port.should.eql(1664);
+        done();
+    });
+
+    it('should throw if services options not exist', done => {
+        const app = new Acacia();
+        (() => app.services()).should.throw('options is required');
+        done();
+    });
+
+    it('should throw if services options is not an object', done => {
+        const app = new Acacia();
+        (() => app.services(1)).should.throw('options must be an object');
         done();
     });
 });

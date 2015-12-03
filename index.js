@@ -71,7 +71,13 @@ class Acacia extends Koa {
      * @return {object} Acacia instance
      */
     services(options) {
-        options = options || {};
+        if (!options)
+            throw new TypeError('options is required');
+
+        if (typeof options != 'object')
+            throw new TypeError('options must be an object');
+
+        options.context = options.context || {};
 
         const base = {
             config: this.context.config
