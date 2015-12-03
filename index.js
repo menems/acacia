@@ -17,7 +17,7 @@ class Acacia extends Koa {
         super();
 
         // expose config
-        this.context.config = config;
+        this.context.config = config || { port: 1664};
 
         // logger
         if (this.env !== 'test')
