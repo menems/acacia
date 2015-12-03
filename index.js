@@ -10,7 +10,6 @@ const bodyParser = require('koa-bodyparser');
 const resources = require('koa-66-aggregate');
 const servicesStack = require('services-stack');
 const extend = require('extend');
-const Validation = require('chain-validator');
 
 class Acacia extends Koa {
 
@@ -30,9 +29,6 @@ class Acacia extends Koa {
 
         // body parser
         this.use(bodyParser());
-
-        // validation helper
-        this.use(Validation.koaMiddleware);
     }
 
     initCors (config) {
@@ -78,8 +74,7 @@ class Acacia extends Koa {
         options = options || {};
 
         const base = {
-            config: this.context.config,
-            Validation : Validation
+            config: this.context.config
         };
 
         options.context = extend(base, options.context);
