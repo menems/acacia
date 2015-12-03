@@ -1,11 +1,11 @@
 'use strict';
 
-// const debug = require('debug')('acacia');
 const Koa = require('koa');
 const morgan = require('koa-morgan');
 const convert = require('koa-convert');
 const cors = require('koa-cors');
 const bodyParser = require('koa-bodyparser');
+const compress = require('koa-compress');
 const resources = require('koa-66-aggregate');
 const servicesStack = require('services-stack');
 const extend = require('extend');
@@ -26,6 +26,8 @@ class Acacia extends Koa {
         // cors
         if (this.context.config.security && this.context.config.security.cors)
             this.initCors(this.context.config.security.cors);
+        // zlib
+        this.use(convert(compress()));
 
         // body parser
         this.use(bodyParser());

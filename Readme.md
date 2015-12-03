@@ -14,10 +14,11 @@ The goal is to have an api starter kit
 
 - log via [koa-morgan](https://github.com/koa-modules/morgan)
 - cors via [koa-cors](https://github.com/evert0n/koa-cors)
+- compress [koa-compress](https://github.com/koajs/compress)
 - body parser via [koa-bodyparser](https://github.com/koajs/bodyparser/tree/3.x)
 - Routes from directory via [koa-66-aggregate](https://github.com/menems/koa-66-aggregate)
 - services helper via [services-stack](https://github.com/menems/services-stack)
-- validation via [chain-validation](https://github.com/menems/chain-validator) WIP
+
 
 ## Installation
 
@@ -30,6 +31,7 @@ $ npm install acacia
 take a look at [acacia-example](https://github.com/menems/acacia-example)
 
 ## Test
+
 ```bash
 $ npm test
 

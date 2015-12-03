@@ -25,6 +25,7 @@
     "koa": "2.0.0-alpha.3",
     "koa-66-aggregate": "^0.1.0",
     "koa-bodyparser": "^3.0.0",
+    "koa-compress": "^1.0.8",
     "koa-convert": "^1.0.0",
     "koa-cors": "0.0.16",
     "koa-morgan": "^1.0.0",
