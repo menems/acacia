@@ -1,4 +1,15 @@
 
+v0.4.0 / 2015-12-03
+===================
+
+  * tests: more
+  * tests: more
+  * chores: lint
+  * feat: default port
+  * feat: add compress
+  * feat: remove Validation
+  * chores: add eslint
+
 v0.2.1 / 2015-12-01
 ===================
 
