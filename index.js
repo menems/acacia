@@ -1,7 +1,6 @@
-"use strict";
+'use strict';
 
-const path =  require('path');
-const debug  = require('debug')('acacia');
+// const debug = require('debug')('acacia');
 const Koa = require('koa');
 const morgan = require('koa-morgan');
 const convert = require('koa-convert');
@@ -13,6 +12,7 @@ const extend = require('extend');
 
 class Acacia extends Koa {
 
+
     constructor(config) {
         super();
 
@@ -20,7 +20,7 @@ class Acacia extends Koa {
         this.context.config = config;
 
         // logger
-        if ( this.env !== 'test')
+        if (this.env !== 'test')
             this.use(morgan(this.context.config.log || 'dev'));
 
         // cors
@@ -31,9 +31,8 @@ class Acacia extends Koa {
         this.use(bodyParser());
     }
 
-    initCors (config) {
-
-        let options = {
+    initCors(config) {
+        const options = {
             origin: req => {
                 if (!req.header.origin ||
                     !config.domains ||
@@ -41,12 +40,12 @@ class Acacia extends Koa {
                     config.domains[0].origin === '*')
                     return '*';
 
-                const has = config.domains.filter( domain =>
+                const has = config.domains.filter(domain =>
                     req.header.origin === domain.origin
                 );
-                return (has.length)? has[0].origin : false;
+                return (has.length) ? has[0].origin : false;
             }
-        }
+        };
 
         if (config.headers) options.headers = config.headers;
 
@@ -69,8 +68,7 @@ class Acacia extends Koa {
      * @param  {object} options
      * @return {object} Acacia instance
      */
-    services (options) {
-
+    services(options) {
         options = options || {};
 
         const base = {
@@ -90,19 +88,18 @@ class Acacia extends Koa {
      * @param  {object} options
      * @return {object} Acacia instance
      */
-    resources (options) {
+    resources(options) {
         this.use(resources(options).routes());
         return this;
     }
 
     listen(fn) {
         return super.listen(this.context.config.port, () => {
-            if ( this.env === 'development')
+            if (this.env === 'development')
                 console.log('listening on ' + this.context.config.port);
             if (fn && typeof fn == 'function') fn.call(this);
         });
     }
-
 }
 
 module.exports = Acacia;
