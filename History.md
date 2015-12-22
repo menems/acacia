@@ -1,4 +1,10 @@
 
+0.4.3 / 2015-12-22
+==================
+
+  * chores: dependencies update
+  * chores: dependencies update
+
 v0.4.2 / 2015-12-07
 ===================
 
