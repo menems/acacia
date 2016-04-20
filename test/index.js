@@ -20,11 +20,12 @@ const config = {
                 methods: ['GET', 'PUT', 'HEAD', 'POST', 'DELETE']
             }]
         }
-    }
+    },
+    responseTime: true
 };
 
 const config2 = {
-    port: 4661,
+    port: 4662,
     security: {
         cors: {
             domains: [{
@@ -62,6 +63,15 @@ describe('acacia main', () => {
         const app = new Acacia();
         (() => app.services(1)).should.throw('options must be an object');
         done();
+    });
+
+    it('should add x-response-time if config is enable', done => {
+        server  = createApp(config);
+        request(server)
+            .get('/')
+            .expect(200)
+            .expect('x-response-time', /.*ms/)
+            .end(() => server.close(() => done()));
     });
 });
 

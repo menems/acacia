@@ -12,6 +12,7 @@ The goal is to have an api starter kit
 
 ## Features
 
+- X-response-time via [response-time](https://github.com/koajs/response-time)
 - log via [koa-morgan](https://github.com/koa-modules/morgan)
 - cors via [koa-cors](https://github.com/evert0n/koa-cors)
 - compress [koa-compress](https://github.com/koajs/compress)

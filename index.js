@@ -9,6 +9,7 @@ const compress = require('koa-compress');
 const resources = require('koa-66-aggregate');
 const servicesStack = require('services-stack');
 const extend = require('extend');
+const responseTime = require('koa-response-time');
 
 class Acacia extends Koa {
 
@@ -18,6 +19,9 @@ class Acacia extends Koa {
 
         // expose config
         this.context.config = config || { port: 1664};
+
+        if (this.context.config.responseTime)
+            this.use(responseTime());
 
         // logger
         if (this.env !== 'test')
